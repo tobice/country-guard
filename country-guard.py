@@ -1,5 +1,18 @@
 #!/usr/bin/env python
 
+################################################################################
+#
+# country-guard - A simple Ubuntu IP-based country indicator.
+#
+# Depending on your current IP-based location, the indicator shows a nice
+# country flag in your notification area. In case you find yourself in an
+# undesirable country, a customizable list of commands is executed. Perfect for
+# detecting unintentional VPN disconnects.
+#
+# Author: Tobias Potocek <tobiaspotocek@gmail.com>
+#
+################################################################################
+
 import signal
 import json
 from gi.repository import Gtk as gtk
@@ -10,11 +23,13 @@ import threading
 import os
 import config
 
-
 APPINDICATOR_ID = "county-guard"
 UNKNOWN_COUNTRY_CODE = "?"
 
+# Current country code
 countryCode = UNKNOWN_COUNTRY_CODE
+
+# Reference to the GTK indicator
 indicator = None
 
 def main():
@@ -44,6 +59,7 @@ def build_menu():
     return menu
 
 def check_country():
+    """ The core function that is repeatedly called to check the country """
     global countryCode
     try:
         ip_info = fetch_ip_info()
@@ -56,6 +72,7 @@ def check_country():
         if countryCode != UNKNOWN_COUNTRY_CODE:
             countryCode = UNKNOWN_COUNTRY_CODE
 
+    # Note that the gaurd commands are executed in every cycle.
     if countryCode not in config.country_whitelist:
         execute_guard_commands()
 
