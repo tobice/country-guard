@@ -32,6 +32,9 @@ countryCode = UNKNOWN_COUNTRY_CODE
 # Reference to the GTK indicator
 indicator = None
 
+# Reference to the timer that executes IP info fetching
+timer = None
+
 def main():
     global indicator
     indicator = build_indicator()
@@ -107,14 +110,15 @@ def get_abs_script_dir():
     return os.path.dirname(os.path.realpath(__file__))
 
 def set_interval(func, sec):
+    global timer
     def func_wrapper():
         set_interval(func, sec)
         func()
-    t = threading.Timer(sec, func_wrapper)
-    t.start()
-    return t
+    timer = threading.Timer(sec, func_wrapper)
+    timer.start()
 
 def quit(source):
+    timer.cancel()
     notify.uninit()
     gtk.main_quit()
 
