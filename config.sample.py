@@ -9,5 +9,5 @@ country_whitelist = ["CZ"]
 # List of commands that are executed whenever the user finds themselves outside
 # of whitelisted countries. Note that these commands are executed periodically.
 guard_commands = [
-    "killall -9 ktorrent",
-    "killall -9 transmission-gtk"]
+    "killall -9 -q ktorrent",
+    "killall -9 -q transmission-gtk"]
