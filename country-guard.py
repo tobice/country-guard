@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import signal
 import json
 from gi.repository import Gtk as gtk
@@ -6,11 +8,8 @@ from urllib2 import Request, urlopen, URLError
 from gi.repository import Notify as notify
 import threading
 import os
+import config
 
-COUNTRY_WHITELIST = ["CZ"]
-GUARD_COMMANDS = [
-    "killall -9 ktorrent",
-    "killall -9 transmission-gtk"]
 
 APPINDICATOR_ID = "county-guard"
 UNKNOWN_COUNTRY_CODE = "?"
@@ -22,7 +21,7 @@ def main():
     global indicator
     indicator = build_indicator()
     notify.init(APPINDICATOR_ID)
-    set_interval(check_country, 2)
+    set_interval(check_country, config.refresh_interval)
     gtk.main()
 
 def build_indicator():
@@ -57,7 +56,7 @@ def check_country():
         if countryCode != UNKNOWN_COUNTRY_CODE:
             countryCode = UNKNOWN_COUNTRY_CODE
 
-    if countryCode not in COUNTRY_WHITELIST:
+    if countryCode not in config.country_whitelist:
         execute_guard_commands()
 
     update_icon()
@@ -74,7 +73,7 @@ def notify_country(country, ip):
         None).show()
 
 def execute_guard_commands():
-    for command in GUARD_COMMANDS:
+    for command in config.guard_commands:
         os.system(command)
 
 def update_icon():
