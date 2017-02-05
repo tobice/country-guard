@@ -2,7 +2,7 @@
 
 ################################################################################
 #
-# country-guard - A simple Ubuntu IP-based country indicator.
+# country-guard - A simple IP-based country indicator for Ubuntu.
 #
 # Depending on your current IP-based location, the indicator shows a nice
 # country flag in your notification area. In case you find yourself in an

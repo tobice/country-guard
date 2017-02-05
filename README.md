@@ -1,6 +1,8 @@
 # country-guard
 
-A simple Ubuntu IP-based country indicator.
+A simple IP-based country indicator for Ubuntu.
+
+[![Screenshot](./screenshot.png)](./screenshot.png)
 
 Depending on your current IP-based location, the indicator shows a nice
 country flag in your notification area. In case you find yourself in an
@@ -44,5 +46,3 @@ Comment=
 
 Don't forget to make both the `country-guard.py` file and the
 `coungry-guard.desktop` file executable.
-~                                                                               
-~                 
