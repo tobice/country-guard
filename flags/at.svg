@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
-<rect fill="#ed2939" width="900" height="600"/>
-<rect fill="#fff" y="200" width="900" height="200"/>
+<svg xmlns="http://www.w3.org/2000/svg" height="512" width="512" viewBox="0 0 512 512">
+  <g fill-rule="evenodd">
+    <path fill="#fff" d="M512 512H0V0h512z"/>
+    <path fill="#df0000" d="M512 512H0V341.33h512zm0-341.2H0V.13h512z"/>
+  </g>
 </svg>

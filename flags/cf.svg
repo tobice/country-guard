@@ -1,9 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="450" height="300" viewBox="0 0 450 300">
-<rect fill="#FFCE00" width="450" height="300"/>
-<rect fill="#289728" width="450" height="225"/>
-<rect fill="#FFFFFF" width="450" height="150"/>
-<rect fill="#003082" width="450" height="75"/>
-<rect x="187.5" fill="#D21034" width="75" height="300"/>
-<path fill="#FFCE00" d="M75.028,7.004L94.9,67.996L42.902,30.333h64.197L55.1,67.996L75.028,7.004z"/>
+<svg xmlns="http://www.w3.org/2000/svg" height="512" width="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="a">
+      <path fill-opacity=".67" d="M0 0h512v512H0z"/>
+    </clipPath>
+  </defs>
+  <g fill-rule="evenodd" clip-path="url(#a)">
+    <path fill="#00f" d="M-52-.506h768v127H-52z"/>
+    <path fill="#ff0" d="M-52 383.5h768V512H-52z"/>
+    <path fill="#009a00" d="M-52 255h768v128.5H-52z"/>
+    <path fill="#fff" d="M-52 126.49h768v128.5H-52z"/>
+    <path fill="red" d="M268 0h128v512H268z"/>
+    <path fill="#ff0" d="M109.493 112.306L75.95 89.11l-33.434 23.424L54.12 73.33 21.604 48.645l40.723-1.034L75.66 8.937l13.562 38.56 40.758.782-32.336 24.866"/>
+  </g>
 </svg>

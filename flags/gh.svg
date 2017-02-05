@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="450" height="300">
-<rect width="450" height="300" fill="#006b3f"/>
-<rect width="450" height="200" fill="#fcd116"/>
-<rect width="450" height="100" fill="#ce1126"/>
-<path d="M225,100 257.492,200 172.427,138.197H277.573L192.508,200z" fill="#000"/>
+<svg xmlns="http://www.w3.org/2000/svg" height="512" width="512" viewBox="0 0 512 512">
+  <path fill="#006b3f" d="M0 0h512v512H0z"/>
+  <path fill="#fcd116" d="M0 0h512v341.333H0z"/>
+  <path fill="#ce1126" d="M0 0h512v170.667H0z"/>
+  <path d="M256 170.667l55.453 170.666-145.178-105.477h179.45L200.547 341.333z"/>
 </svg>
