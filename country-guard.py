@@ -5,22 +5,29 @@ from gi.repository import AppIndicator3 as appindicator
 from urllib2 import Request, urlopen, URLError
 from gi.repository import Notify as notify
 import threading
+import os
 
 APPINDICATOR_ID = "county-guard"
 UNKNOWN_COUNTRY_CODE = "?"
 
 countryCode = UNKNOWN_COUNTRY_CODE
+indicator = None
 
 def main():
-    indicator = appindicator.Indicator.new(
-        APPINDICATOR_ID,
-        "whatever",
-        appindicator.IndicatorCategory.SYSTEM_SERVICES)
-    indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
-    indicator.set_menu(build_menu())
+    global indicator
+    indicator = build_indicator()
     notify.init(APPINDICATOR_ID)
     set_interval(check_country, 2)
     gtk.main()
+
+def build_indicator():
+    indicator = appindicator.Indicator.new(
+        APPINDICATOR_ID,
+        gtk.STOCK_REFRESH,
+        appindicator.IndicatorCategory.SYSTEM_SERVICES)
+    indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
+    indicator.set_menu(build_menu())
+    return indicator
 
 def build_menu():
     menu = gtk.Menu()
@@ -50,6 +57,8 @@ def check_country():
             countryCode = UNKNOWN_COUNTRY_CODE
             notify_failure()
 
+    update_icon()
+
 def fetch_ip_info():
     request = Request("http://ip-api.com/json/")
     response = urlopen(request)
@@ -64,6 +73,19 @@ def notify_country(country, ip):
 def notify_failure():
     notify.Notification.new(
         "Unable to get current IP information!", None, None).show()
+
+def update_icon():
+    global indicator, countryCode
+    indicator.set_icon(
+        gtk.STOCK_STOP if countryCode == UNKNOWN_COUNTRY_CODE
+        else get_icon_file(countryCode))
+
+def get_icon_file(countryCode):
+    icon = get_abs_script_dir() + "/flags/" + countryCode.lower() + ".svg"
+    return icon if os.path.isfile(icon) else gtk.STOCK_DIALOG_QUESTION
+
+def get_abs_script_dir():
+    return os.path.dirname(os.path.realpath(__file__))
 
 def set_interval(func, sec):
     def func_wrapper():
