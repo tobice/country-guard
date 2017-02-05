@@ -7,6 +7,11 @@ from gi.repository import Notify as notify
 import threading
 import os
 
+COUNTRY_WHITELIST = ["CZ"]
+GUARD_COMMANDS = [
+    "killall -9 ktorrent",
+    "killall -9 transmission-gtk"]
+
 APPINDICATOR_ID = "county-guard"
 UNKNOWN_COUNTRY_CODE = "?"
 
@@ -36,10 +41,6 @@ def build_menu():
     item_quit.connect("activate", quit)
     menu.append(item_quit)
 
-    # item_joke = gtk.MenuItem("Joke")
-    # item_joke.connect("activate", joke)
-    # menu.append(item_joke)
-
     menu.show_all()
     return menu
 
@@ -55,7 +56,9 @@ def check_country():
     except Exception:
         if countryCode != UNKNOWN_COUNTRY_CODE:
             countryCode = UNKNOWN_COUNTRY_CODE
-            notify_failure()
+
+    if countryCode not in COUNTRY_WHITELIST:
+        execute_guard_commands()
 
     update_icon()
 
@@ -70,9 +73,9 @@ def notify_country(country, ip):
         "Your IP: %s" % ip,
         None).show()
 
-def notify_failure():
-    notify.Notification.new(
-        "Unable to get current IP information!", None, None).show()
+def execute_guard_commands():
+    for command in GUARD_COMMANDS:
+        os.system(command)
 
 def update_icon():
     global indicator, countryCode
